@@ -1,0 +1,8 @@
+{
+  "name": "simb-ad-mvp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SIMB-AD hackathon demo: pharmacy retail media, API and transparent ad effectiveness score",
+  "scripts": {"start": "node server.js"},
+  "engines": {"node": ">=18"}
+}

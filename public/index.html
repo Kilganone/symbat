@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIMB-AD — реклама для онлайн-аптек</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="logo" href="#" aria-label="SIMB-AD"><span class="logo-mark">✳</span><span>SIMB<span class="blue">-AD</span></span></a>
+  <nav class="seg" aria-label="Интерфейсы">
+    <button class="seg-btn active" data-page="store">🛍️ Онлайн-аптека</button>
+    <button class="seg-btn" data-page="advertiser">📈 Кабинет рекламодателя</button>
+    <button class="seg-btn" data-page="pharmacy">🏪 Кабинет аптеки</button>
+  </nav>
+  <div class="top-right">
+    <span class="demo-flag"><span class="dot"></span>Демо-данные</span>
+    <button id="cartBtn" class="cart-btn" aria-label="Корзина">🛒 <span id="cartCount" class="cart-count">0</span></button>
+  </div>
+</header>
+
+<main>
+  <!-- ===== Онлайн-аптека ===== -->
+  <section id="page-store" class="page active">
+    <div class="hero">
+      <div>
+        <span class="eyebrow">SIMB PHARMACY · ДЕМОНСТРАЦИЯ</span>
+        <h1>Всё для здоровья<br><span class="gradient">рядом с вами</span></h1>
+        <p>Сравнивайте цены в аптеках, бронируйте онлайн и забирайте без очереди.</p>
+      </div>
+      <div class="hero-note">Вымышленные аптеки и бренды.<br>Только безрецептурные товары.</div>
+    </div>
+
+    <div class="search-panel">
+      <div class="search-wrap">
+        <span class="search-icon">⌕</span>
+        <input id="search" autocomplete="off" placeholder="Найдите товар: витамин, крем, паста…" aria-label="Поиск товаров">
+        <button id="clearSearch" title="Очистить" aria-label="Очистить">×</button>
+      </div>
+      <div id="chips" class="chips"></div>
+    </div>
+
+    <div id="searchAds"></div>
+
+    <div class="section-head">
+      <div><h2 id="resultHeading">Каталог товаров</h2><p id="resultsHint" class="muted"></p></div>
+      <span class="pill" id="resultCount"></span>
+    </div>
+    <div id="productsGrid" class="grid"></div>
+
+    <div class="section-head">
+      <div>
+        <span class="eyebrow green">РЕКЛАМНЫЕ СКИДКИ</span>
+        <h2>Акции от брендов</h2>
+        <p class="muted">Спонсируемые предложения со скидкой. Цена зависит от аптеки.</p>
+      </div>
+      <span class="ad-label">Реклама</span>
+    </div>
+    <div id="discountAds" class="grid"></div>
+  </section>
+
+  <!-- ===== Кабинет рекламодателя ===== -->
+  <section id="page-advertiser" class="page">
+    <div class="page-head">
+      <div>
+        <span class="eyebrow">КАБИНЕТ РЕКЛАМОДАТЕЛЯ</span>
+        <h1>Реклама, которая измеряется <span class="gradient">продажами</span></h1>
+      </div>
+      <div class="head-actions">
+        <select id="advFilter" aria-label="Кампания"></select>
+        <button id="openCampaign" class="btn primary">＋ Новая кампания</button>
+      </div>
+    </div>
+    <div id="advKpis" class="kpis"></div>
+
+    <div class="card score-card" id="scoreCard"></div>
+
+    <div class="two-cols">
+      <div class="card"><div class="card-title">Показы и клики по дням</div><div id="chartImp"></div></div>
+      <div class="card"><div class="card-title">Расходы и выручка по дням, ₸</div><div id="chartMoney"></div></div>
+    </div>
+
+    <div class="section-head"><div><h2>Рекламные кампании</h2><p class="muted">Деньги списываются только за валидные клики. ROAS считается по подтверждённым демо-продажам.</p></div></div>
+    <div id="campaignTable" class="card table-card"></div>
+  </section>
+
+  <!-- ===== Кабинет аптеки ===== -->
+  <section id="page-pharmacy" class="page">
+    <div class="page-head">
+      <div>
+        <span class="eyebrow green">КАБИНЕТ АПТЕКИ</span>
+        <h1>Реклама приносит <span class="gradient">доход аптеке</span></h1>
+      </div>
+      <div id="phChips" class="chips"></div>
+    </div>
+    <div id="phKpis" class="kpis"></div>
+    <div class="two-cols">
+      <div class="card" id="splitCard"></div>
+      <div class="card"><div class="card-title">Рекламный доход аптеки по дням, ₸</div><div id="chartIncome"></div></div>
+    </div>
+    <div class="section-head"><div><h2>Брони покупателей</h2><p class="muted">Подтвердите выдачу — это фиксирует демо-продажу. Продажи по рекламе попадают в кабинет рекламодателя.</p></div></div>
+    <div id="phReservations" class="card table-card"></div>
+    <div class="two-cols">
+      <div class="card table-card"><div class="card-title pad">Рекламные кампании в аптеке</div><div id="phCampaigns"></div></div>
+      <div class="card table-card"><div class="card-title pad">Распределение рекламных доходов по аптекам</div><div id="phDistribution"></div></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>SIMB-AD · хакатон-MVP</span>
+  <span>Демонстрационные данные · Не медицинская рекомендация · Реклама промаркирована</span>
+  <button id="resetDemo" class="link-btn">Сбросить демо-данные</button>
+</footer>
+
+<div id="toast" class="toast" role="status"></div>
+
+<!-- Модальное окно: товар -->
+<div id="productModal" class="modal hidden">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card wide" id="productModalBody"></div>
+</div>
+
+<!-- Корзина -->
+<div id="cartDrawer" class="drawer hidden">
+  <div class="modal-backdrop" data-close></div>
+  <aside class="drawer-card" id="cartBody"></aside>
+</div>
+
+<!-- Новая кампания -->
+<div id="campaignModal" class="modal hidden">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card">
+    <div class="modal-title">
+      <div><span class="eyebrow">НОВАЯ РЕКЛАМНАЯ КАМПАНИЯ</span><h2>Запустить рекламу</h2></div>
+      <button data-close class="close-btn" aria-label="Закрыть">×</button>
+    </div>
+    <form id="campaignForm">
+      <label>Товар<select id="cfProduct" required></select></label>
+      <label>Ключевые слова (через запятую)<input id="cfKeywords" placeholder="витамин, иммунитет"></label>
+      <div class="two">
+        <label>Бюджет, ₸<input id="cfBudget" type="number" min="1000" max="10000000" value="50000" required></label>
+        <label>Цена клика (CPC), ₸<input id="cfCpc" type="number" min="10" max="1000" value="150" required></label>
+      </div>
+      <label>Скидка для покупателя, %<input id="cfDiscount" type="number" min="0" max="50" value="10" required></label>
+      <fieldset><legend>Аптеки, где показывается реклама</legend><div id="cfPharmacies" class="checks"></div></fieldset>
+      <p class="muted" id="cfHint"></p>
+      <button type="submit" class="btn primary full">Создать кампанию</button>
+    </form>
+  </div>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>
